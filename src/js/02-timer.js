@@ -7,9 +7,38 @@ import Notiflix from 'notiflix';
 const dateTimePicker = document.querySelector('#datetime-picker');
 const timerShow = document.querySelector('.timer');
 const btnStart = document.querySelector('button[data-start]');
+
+const fields = document.querySelectorAll('.field');
+const spanValue = document.querySelectorAll('.value');
+const spanLabel = document.querySelectorAll('.label');
+const dataDays = document.querySelector('[data-days]');
+const dataHours = document.querySelector('[data-hours]');
+const dataMinutes = document.querySelector('[data-minutes]');
+const dataSeconds = document.querySelector('[data-seconds]');
+
 let timeInterval = null;
-let selectedDate = null;
+let selectedDate = new Date();
 btnStart.disabled = true;
+
+for (const span of spanValue) {
+  span.style.fontSize = '2.25rem';
+  span.style.fontWeight = '500';
+}
+
+for (const span of spanLabel) {
+  span.style.fontSize = '0.75rem';
+  span.style.textTransform = 'uppercase';
+}
+
+for (const field of fields) {
+  field.style.display = 'flex';
+  field.style.flexDirection = 'column';
+  field.style.justifyContent = 'center';
+  field.style.alignItems = 'center';
+  field.style.marginRight = '10px';
+}
+
+timerShow.style.display = 'flex';
 
 const options = {
   enableTime: true,
@@ -51,7 +80,10 @@ function timeCounter() {
 }
 
 function updateTimerFace({ days, hours, minutes, seconds }) {
-  timerShow.textContent = `${days}:${hours}:${minutes}:${seconds}`;
+  dataDays.textContent = `${days}`;
+  dataHours.textContent = `${hours}`;
+  dataMinutes.textContent = `${minutes}`;
+  dataSeconds.textContent = `${seconds}`;
 }
 
 function addLeadingZero(value) {
