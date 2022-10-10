@@ -19,6 +19,7 @@ const dataSeconds = document.querySelector('[data-seconds]');
 let timeInterval = null;
 let selectedDate = new Date();
 btnStart.disabled = true;
+timerShow.style.display = 'flex';
 
 for (const span of spanValue) {
   span.style.fontSize = '2.25rem';
@@ -37,8 +38,6 @@ for (const field of fields) {
   field.style.alignItems = 'center';
   field.style.marginRight = '10px';
 }
-
-timerShow.style.display = 'flex';
 
 const options = {
   enableTime: true,
@@ -91,22 +90,14 @@ function addLeadingZero(value) {
 }
 
 function convertMs(ms) {
-  // Number of milliseconds per unit of time
   const second = 1000;
   const minute = second * 60;
   const hour = minute * 60;
   const day = hour * 24;
-
-  // Remaining days
-  const days = addLeadingZero(Math.floor(ms / day));
-  // Remaining hours
-  const hours = addLeadingZero(Math.floor((ms % day) / hour));
-  // Remaining minutes
-  const minutes = addLeadingZero(Math.floor(((ms % day) % hour) / minute));
-  // Remaining seconds
-  const seconds = addLeadingZero(
-    Math.floor((((ms % day) % hour) % minute) / second)
-  );
+  const days = addLeadingZero(Math.floor(ms/day));
+  const hours = addLeadingZero(Math.floor((ms%day)/hour));
+  const minutes = addLeadingZero(Math.floor(((ms%day)%hour)/minute));
+  const seconds = addLeadingZero(Math.floor((((ms % day)%hour)%minute)/second));
 
   return { days, hours, minutes, seconds };
 }
