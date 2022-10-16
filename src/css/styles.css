@@ -20,11 +20,11 @@ body {
   display: block;
   outline: none;
   border-radius: 16px;
-  border-color: red;
+  border-color: teal;
 }
 
 #search-box:focus {
-  border-color: teal;
+  border-color: blue;
 }
 
 #search-box:hover {
