@@ -1,12 +1,20 @@
 import './css/styles.css';
 import fetchCountries from './fetchCountries';
+import debounce from 'lodash.debounce';
 import Notiflix from 'notiflix';
 
-const _ = require('lodash');
+// const _ = require('lodash');
 const DEBOUNCE_DELAY = 300;
 const countryList = document.querySelector('.country-list');
 const countryInfo = document.querySelector('.country-info');
 const searchStr = document.querySelector('#search-box');
+
+searchStr.addEventListener('input', debounce(searchCountry, DEBOUNCE_DELAY));
+
+function searchCountry(event) {
+  let searchCountry = event.target.value.trim().toLowerCase();
+  fetchCountries(searchCountry).then(renderCountryCard).catch(catchError);
+}
 
 function clearSearchResults() {
   countryList.innerHTML = '';
@@ -61,13 +69,13 @@ function createCountryInfo(country) {
     `;
 }
 
-searchStr.addEventListener(
-  'input',
-  _.debounce(() => {
-    const name = searchStr.value.trim().toLowerCase();
-    if (name.length === 0) {
-      return clearSearchResults();
-    }
-    fetchCountries(name).then(renderCountryCard).catch(catchError);
-  }, DEBOUNCE_DELAY)
-);
+// searchStr.addEventListener(
+//   'input',
+//   _.debounce(() => {
+//     const name = searchStr.value.trim().toLowerCase();
+//     if (name.length === 0) {
+//       return clearSearchResults();
+//     }
+//     fetchCountries(name).then(renderCountryCard).catch(catchError);
+//   }, DEBOUNCE_DELAY)
+// );
