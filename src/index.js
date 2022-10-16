@@ -1,5 +1,5 @@
 import './css/styles.css';
-import { fetchCountries } from './fetchCountries.js';
+import { fetchCountries } from './fetchcountries.js';
 import debounce from 'lodash.debounce';
 import Notiflix from 'notiflix';
 
