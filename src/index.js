@@ -13,7 +13,7 @@ searchStr.addEventListener('input', debounce(searchCountry, DEBOUNCE_DELAY));
 
 function searchCountry(event) {
   let searchCountry = event.target.value.trim().toLowerCase();
-  fetchCountries(searchCountry).then(renderCountryCard).catch(catchError);
+  // fetchCountries(searchCountry).then(renderCountryCard).catch(catchError);
 }
 
 function clearSearchResults() {
