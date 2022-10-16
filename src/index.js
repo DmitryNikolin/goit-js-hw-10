@@ -12,8 +12,15 @@ const searchStr = document.querySelector('#search-box');
 searchStr.addEventListener('input', debounce(searchCountry, DEBOUNCE_DELAY));
 
 function searchCountry(event) {
+  clearSearchResults();
   let searchCountry = event.target.value.trim().toLowerCase();
-  fetchCountries(searchCountry).then(renderCountryCard).catch(catchError);
+  searchStr.value = searchCountry;
+  if (searchCountry.length > 0) {
+    fetchCountries(searchCountry).then(renderCountryCard).catch(catchError);
+  } else {
+    Notiflix.Notify.info('Enter country name with length over zero and name is not just spaces');
+    searchStr.value = searchStr.value.trim();
+  }
 }
 
 function clearSearchResults() {
@@ -73,6 +80,7 @@ function createCountryInfo(country) {
 //   'input',
 //   _.debounce(() => {
 //     const name = searchStr.value.trim().toLowerCase();
+//     searchStr.value = name;
 //     if (name.length === 0) {
 //       return clearSearchResults();
 //     }
