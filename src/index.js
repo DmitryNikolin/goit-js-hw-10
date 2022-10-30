@@ -18,7 +18,9 @@ function searchCountry(event) {
   if (searchCountry.length > 0) {
     fetchCountries(searchCountry).then(renderCountryCard).catch(catchError);
   } else {
-    Notiflix.Notify.info('Enter country name with length over zero and name is not just spaces');
+    Notiflix.Notify.info(
+      'Enter country name with length over zero and name is not just spaces'
+    );
     searchStr.value = searchStr.value.trim();
   }
 }
